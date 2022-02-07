@@ -1,4 +1,4 @@
-# vue_travel_info
+# Taiwan_travel_info_vue
 
 ## Project setup
 ```
