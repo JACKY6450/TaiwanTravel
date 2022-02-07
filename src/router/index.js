@@ -8,7 +8,55 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    redirect: '/home',
+    component: Home,
+    children: [
+      {
+        path: '/home',
+        name: 'HomeIndex',
+        component : () => import('../views/HomeIndex.vue')
+      },
+      {
+        path: '/taipei',
+        name: 'Taipei',
+        component : () => import('../views/Travelinfo/Taipei.vue')
+      },
+      {
+        path: '/newTaipei',
+        name: 'NewTaipei',
+        component : () => import('../views/Travelinfo/NewTaipei.vue')
+      },
+      {
+        path: '/taichung',
+        name: 'Taichung',
+        component : () => import('../views/Travelinfo/Taichung.vue')
+      },
+      {
+        path: '/tainan',
+        name: 'Tainan',
+        component : () => import('../views/Travelinfo/Tainan.vue')
+      },
+      {
+        path: '/kaohsiung',
+        name: 'Kaohsiung',
+        component : () => import('../views/Travelinfo/Kaohsiung.vue')
+      },
+      {
+        path: '/nantou',
+        name: 'Nantou',
+        component : () => import('../views/Travelinfo/Nantou.vue')
+      },
+      {
+        path: '/hualien',
+        name: 'Hualien',
+        component : () => import('../views/Travelinfo/Hualien.vue')
+      },
+      {
+        path: '/taitung',
+        name: 'Taitung',
+        component : () => import('../views/Travelinfo/Taitung.vue')
+      },
+    ],
   },
   {
     path: '/about',

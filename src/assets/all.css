@@ -1,0 +1,13 @@
+
+.header {
+  padding-top: 90px;
+  padding-bottom: 120px;
+  /* background-image: url(images/city-view-gdf9c3a2ee_1920.jpg); */
+  background-size: cover;
+  background-position: center center;
+}
+
+.bg-cover {
+  background-size: cover;
+  background-position: center center;
+}
