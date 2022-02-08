@@ -1,9 +1,9 @@
 <template>
   <div class="homeIndex">
     <loading :active.sync="isLoading"></loading>
-    <div class="container mt-4">
+    <div class="container pt-4">
       <div class="row">
-        <div class="cityCol col-sm-6 mb-4" v-for="item in travelArea" :key="item.city">
+        <div class="cityCol col-sm-6 col-lg-4 mb-4" v-for="item in travelArea" :key="item.city">
           <router-link :to="item.linkTo">
             <div class="card text-dark text-center">
               <div class="card-head position-relative" style="height:200px">
@@ -33,6 +33,11 @@ export default {
     return {
       isLoading: false,
       travelArea: [
+        {
+          city: '基隆市旅遊資訊',
+          linkTo: '/keelung',
+          pic: require('@/assets/pic/bannerKeelung.jpg'),
+        },
         {
           city: '台北市旅遊資訊',
           linkTo: '/taipei',

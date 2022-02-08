@@ -17,6 +17,11 @@ const routes = [
         component : () => import('../views/HomeIndex.vue')
       },
       {
+        path: '/keelung',
+        name: 'Keelung',
+        component : () => import('../views/Travelinfo/Keelung.vue')
+      },
+      {
         path: '/taipei',
         name: 'Taipei',
         component : () => import('../views/Travelinfo/Taipei.vue')

@@ -50,8 +50,8 @@
                 {{ item.Toldescribe }}
               </p>
             </li>
-            <li class="text-right font-weight-bold text-secondary" >
-              關鍵字: {{ item.Keyword }}
+            <li class="text-secondary" v-if="item.Website">
+              詳細請參考: <a :href="item.Website" target="_blank">{{ item.Website }}</a>
             </li>
           </ul>
         </div>

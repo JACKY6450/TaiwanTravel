@@ -3,7 +3,7 @@
     <loading :active.sync="isLoading"></loading>
     <header class="header">
       <div class="container text-center">
-        <h1 class="text-white" style="margin-bottom: 95px">台南旅遊資訊</h1>
+        <h1 class="text-white" style="margin-bottom: 95px">基隆旅遊資訊</h1>
         <div class="row justify-content-center">
           <div class="col-sm-6">
             <select name="" id="" class="form-control input-lg" v-model="currentLocation" @change="changeLoading()">
@@ -27,6 +27,7 @@
           <ShowInfoCol
             v-for="(item, index) in filterData[currentPage]" :key="index" 
             :item="item" 
+            @openModal="openModal"
           />
         </div>
       </section>
@@ -36,24 +37,30 @@
         @changePage="changePage"
       />
     </div>
+    <InfoDetail 
+      :dataTemp="dataTemp"
+    />
   </div>
 </template>
 
 <script>
+import $ from "jquery"
 import {dataReturn} from '@/static/kaohZipCode.js'
 import PopularDistrict from '@/components/PopularDistrict.vue'
 import ShowInfoCol from '@/components/ShowInfoCol.vue'
 import Pagination from '@/components/Pagination.vue'
+import InfoDetail from '@/components/InfoDetail.vue'
 export default {
   name: 'Kaohsiung',
   components: {
-    PopularDistrict, Pagination, ShowInfoCol
+    PopularDistrict, Pagination, ShowInfoCol, InfoDetail
   },
   data() {
     return {
       data: [],
       locations: [],
       popularSet: [],
+      dataTemp: {},
       currentLocation: '',
       currentPage: 0,
       pages: 0,
@@ -111,12 +118,12 @@ export default {
         }
       })
       this.locations = Array.from(locations); //將set轉為一般陣列再存入locations 
-      console.log('loc', this.locations)
+      
     },
     setPopular() {
       let popularSet = [];
       this.locations.forEach((item) => {
-        if(['安平區', '中西區', '仁德區', '北門區'].includes(item)){
+        if(['安樂區', '中山區', '中正區', '仁愛區'].includes(item)){
           popularSet.push({
             Zone: item,
           });
@@ -150,6 +157,10 @@ export default {
         this.isLoading = false;
       },500)
     },
+    openModal(item){
+      this.dataTemp = item;
+      $('#infoModal').modal('show');
+    },
   },
   created() {
     const apiUrl = '/data/scenic_spot_C_f.json';
@@ -158,7 +169,7 @@ export default {
       console.log('res', response)
       let data = response.data.XML_Head.Infos.Info;
       let tempData = data.filter((item) => {
-        if(item.Region === '臺南市') return item
+        if(item.Region === '基隆市') return item
       })
       tempData.forEach((item) => {
         item.Zone = item.Town;
@@ -178,7 +189,7 @@ export default {
 
 <style scoped> 
   .header {
-    background: url("../../assets/pic/bannerTainan.jpg");
+    background: url("../../assets/pic/bannerKeelung.jpg");
     background-size: cover;
     background-position: center center;
   }

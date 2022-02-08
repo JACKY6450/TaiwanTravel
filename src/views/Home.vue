@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
       <a class="navbar-brand" href="/">台灣旅遊資訊</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -8,6 +8,9 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
+          <li class="nav-item active mr-1">
+            <router-link class="nav-link" to="keelung">基隆市</router-link>
+          </li>
           <li class="nav-item active mr-1">
             <router-link class="nav-link" to="taipei">台北市</router-link>
           </li>
@@ -66,6 +69,9 @@ export default {
 }
 </script>
 <style scoped>
+.home{
+  margin-top: 5rem;
+}
 #nav {
   padding: 20px;
   text-align: center;
