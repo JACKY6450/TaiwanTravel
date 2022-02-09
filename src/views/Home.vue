@@ -9,9 +9,6 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active mr-1">
-            <router-link class="nav-link" to="keelung">基隆市</router-link>
-          </li>
-          <li class="nav-item active mr-1">
             <router-link class="nav-link" to="taipei">台北市</router-link>
           </li>
           <li class="nav-item active mr-1">
@@ -19,6 +16,9 @@
           </li>
           <li class="nav-item active mr-1">
             <router-link class="nav-link" to="taichung">台中市</router-link>
+          </li>
+          <li class="nav-item active mr-1">
+            <router-link class="nav-link" to="keelung">嘉義</router-link>
           </li>
           <li class="nav-item active mr-1">
             <router-link class="nav-link" to="tainan">台南市</router-link>

@@ -3,7 +3,7 @@
     <loading :active.sync="isLoading"></loading>
     <header class="header">
       <div class="container text-center">
-        <h1 class="text-white" style="margin-bottom: 95px">基隆旅遊資訊</h1>
+        <h1 class="text-white" style="margin-bottom: 95px">嘉義旅遊資訊</h1>
         <div class="row justify-content-center">
           <div class="col-sm-6">
             <select name="" id="" class="form-control input-lg" v-model="currentLocation" @change="changeLoading()">
@@ -123,7 +123,7 @@ export default {
     setPopular() {
       let popularSet = [];
       this.locations.forEach((item) => {
-        if(['安樂區', '中山區', '中正區', '仁愛區'].includes(item)){
+        if(['阿里山鄉', '梅山鄉', '東區', '西區'].includes(item)){
           popularSet.push({
             Zone: item,
           });
@@ -169,7 +169,7 @@ export default {
       console.log('res', response)
       let data = response.data.XML_Head.Infos.Info;
       let tempData = data.filter((item) => {
-        if(item.Region === '基隆市') return item
+        if(['嘉義市', '嘉義縣'].includes(item.Region)) return item
       })
       tempData.forEach((item) => {
         item.Zone = item.Town;
@@ -189,7 +189,7 @@ export default {
 
 <style scoped> 
   .header {
-    background: url("../../assets/pic/bannerKeelung.jpg");
+    background: url("../../assets/pic/bannerChiayi.jpg");
     background-size: cover;
     background-position: center center;
   }

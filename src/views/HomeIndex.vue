@@ -34,11 +34,6 @@ export default {
       isLoading: false,
       travelArea: [
         {
-          city: '基隆市旅遊資訊',
-          linkTo: '/keelung',
-          pic: require('@/assets/pic/bannerKeelung.jpg'),
-        },
-        {
           city: '台北市旅遊資訊',
           linkTo: '/taipei',
           pic: require('@/assets/pic/bannerTaipei.jpg'),
@@ -52,6 +47,11 @@ export default {
           city: '台中市旅遊資訊',
           linkTo: '/taichung',
           pic: require('@/assets/pic/bannerTaichung.jpg'),
+        },
+        {
+          city: '嘉義縣市旅遊資訊',
+          linkTo: '/keelung',
+          pic: require('@/assets/pic/bannerChiayi.jpg'),
         },
         {
           city: '台南市旅遊資訊',

@@ -19,7 +19,7 @@ const routes = [
       {
         path: '/keelung',
         name: 'Keelung',
-        component : () => import('../views/Travelinfo/Keelung.vue')
+        component : () => import('../views/Travelinfo/Chiayi.vue')
       },
       {
         path: '/taipei',
