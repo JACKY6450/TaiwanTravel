@@ -161,12 +161,30 @@ export default {
       this.dataTemp = item;
       $('#infoModal').modal('show');
     },
+    recall(){
+      const apiUrl = 'https://jacky6450.github.io/TaiwanTravel/data/scenic_spot_C_f.json';
+      this.$http.get(apiUrl).then((response) => {
+        // console.log('res', response);
+        let data = response.data.XML_Head.Infos.Info;
+        let tempData = data.filter((item) => {
+          if(item.Region === '臺東縣') return item
+        })
+        tempData.forEach((item) => {
+          item.Zone = item.Town;
+        })
+        this.data = tempData;
+        // console.log('data', this.data);
+        this.getUniqueList(); // 取得資料後，將地區的值取出來
+        this.setPopular(); //設定熱門景點按鈕
+        this.changeLoading();
+      })
+    }
   },
   created() {
     const apiUrl = '/data/scenic_spot_C_f.json';
     this.isLoading = true;
     this.$http.get(apiUrl).then((response) => {
-      console.log('res', response)
+      // console.log('res', response);
       let data = response.data.XML_Head.Infos.Info;
       let tempData = data.filter((item) => {
         if(item.Region === '臺東縣') return item
@@ -175,13 +193,14 @@ export default {
         item.Zone = item.Town;
       })
       this.data = tempData;
-      console.log('data', this.data);
-      // this.handleAdminArea(); //data沒有區名只有zipCode時需要
+      // console.log('data', this.data);
       this.getUniqueList(); // 取得資料後，將地區的值取出來
-      this.setPopular();
-      setTimeout(() => {
-        this.isLoading = false;
-      },500)
+      this.setPopular(); //設定熱門景點按鈕
+      this.changeLoading();
+    }).catch((error) => {
+      if(error.response.status === 404){
+        this.recall(); //給githubPage用
+      }
     })
   }
 }
