@@ -184,7 +184,7 @@ export default {
     }
   },
   created() {
-    const apiUrl = 'https://cors-anywhere.herokuapp.com/https://gis.taiwan.net.tw/XMLReleaseALL_public/scenic_spot_C_f.json';
+    const apiUrl = '/data/scenic_spot_C_f.json';
     this.isLoading = true;
     this.$http.get(apiUrl).then((response) => {
       this.init(response);
