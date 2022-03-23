@@ -164,30 +164,14 @@ export default {
     recall(){
       const apiUrl = 'https://jacky6450.github.io/TaiwanTravel/data/scenic_spot_C_f.json';
       this.$http.get(apiUrl).then((response) => {
-        // console.log('res', response);
-        let data = response.data.XML_Head.Infos.Info;
-        let tempData = data.filter((item) => {
-          if(['嘉義市', '嘉義縣'].includes(item.Region)) return item
-        })
-        tempData.forEach((item) => {
-          item.Zone = item.Town;
-        })
-        this.data = tempData;
-        // console.log('data', this.data);
-        this.getUniqueList(); // 取得資料後，將地區的值取出來
-        this.setPopular(); //設定熱門景點按鈕
-        this.changeLoading();
+        this.init(response);
       })
-    }
-  },
-  created() {
-    const apiUrl = '/data/scenic_spot_C_f.json';
-    this.isLoading = true;
-    this.$http.get(apiUrl).then((response) => {
+    },
+    init(response){
       // console.log('res', response);
       let data = response.data.XML_Head.Infos.Info;
       let tempData = data.filter((item) => {
-        if(['嘉義市', '嘉義縣'].includes(item.Region)) return item
+        if(['嘉義市','嘉義縣'].includes(item.Region)) return item
       })
       tempData.forEach((item) => {
         item.Zone = item.Town;
@@ -197,6 +181,13 @@ export default {
       this.getUniqueList(); // 取得資料後，將地區的值取出來
       this.setPopular(); //設定熱門景點按鈕
       this.changeLoading();
+    }
+  },
+  created() {
+    const apiUrl = '/data/scenic_spot_C_f.json';
+    this.isLoading = true;
+    this.$http.get(apiUrl).then((response) => {
+      this.init(response);
     }).catch((error) => {
       if(error.response.status === 404){
         this.recall(); //給githubPage用

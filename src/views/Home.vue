@@ -1,7 +1,9 @@
 <template>
   <div class="home">
-    <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-      <a class="navbar-brand" href="#" @click.prevent="toHome()" >台灣旅遊資訊</a>
+    <nav id="nav" class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="padding: 10px 20px">
+      <a class="navbar-brand" href="#" @click.prevent="toHome()" >
+        <img src="@/assets/pic/NavLogo.png" alt="" style="height: 50px">
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>

@@ -3,7 +3,7 @@
     <loading :active.sync="isLoading"></loading>
     <header class="header">
       <div class="container text-center">
-        <h1 class="text-white" style="margin-bottom: 95px">台中旅遊資訊</h1>
+        <h1 class="text-white" style="margin-bottom: 95px">台南旅遊資訊</h1>
         <div class="row justify-content-center">
           <div class="col-sm-6">
             <select name="" id="" class="form-control input-lg" v-model="currentLocation" @change="changeLoading()">
@@ -164,26 +164,10 @@ export default {
     recall(){
       const apiUrl = 'https://jacky6450.github.io/TaiwanTravel/data/scenic_spot_C_f.json';
       this.$http.get(apiUrl).then((response) => {
-        // console.log('res', response);
-        let data = response.data.XML_Head.Infos.Info;
-        let tempData = data.filter((item) => {
-          if(item.Region === '臺南市') return item
-        })
-        tempData.forEach((item) => {
-          item.Zone = item.Town;
-        })
-        this.data = tempData;
-        // console.log('data', this.data);
-        this.getUniqueList(); // 取得資料後，將地區的值取出來
-        this.setPopular(); //設定熱門景點按鈕
-        this.changeLoading();
+        this.init(response);
       })
-    }
-  },
-  created() {
-    const apiUrl = '/data/scenic_spot_C_f.json';
-    this.isLoading = true;
-    this.$http.get(apiUrl).then((response) => {
+    },
+    init(response){
       // console.log('res', response);
       let data = response.data.XML_Head.Infos.Info;
       let tempData = data.filter((item) => {
@@ -197,6 +181,13 @@ export default {
       this.getUniqueList(); // 取得資料後，將地區的值取出來
       this.setPopular(); //設定熱門景點按鈕
       this.changeLoading();
+    }
+  },
+  created() {
+    const apiUrl = '/data/scenic_spot_C_f.json';
+    this.isLoading = true;
+    this.$http.get(apiUrl).then((response) => {
+      this.init(response);
     }).catch((error) => {
       if(error.response.status === 404){
         this.recall(); //給githubPage用
@@ -208,7 +199,7 @@ export default {
 
 <style scoped> 
   .header {
-    background: url("../../assets/pic/bannerTaichung.jpg");
+    background: url("../../assets/pic/bannerTainan.jpg");
     background-size: cover;
     background-position: center center;
   }
