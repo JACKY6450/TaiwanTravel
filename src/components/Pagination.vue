@@ -13,8 +13,7 @@
       </li>
       <!-- 分頁渲染 -->
       <li  
-        v-for="page in pages" :key="page"
-        v-show="(currentPage+1) < 3 ? page <= 5 : Math.abs((currentPage+1)-page) < 3"
+        v-for="page in renderPages" :key="page"
         class="page-item" 
         :class="{active: currentPage === page - 1}">
         <a class="page-link" href="#" @click.prevent = "$emit('changePage', page-1)">{{ page }}</a>
@@ -47,6 +46,32 @@ export default {
       default: null,
     },
   },
+  data(){
+    return{
+      pageUnProcess: []
+    }
+  },
+  watch: {
+    pages(val){
+      for(let i=0 ;i< val; i++){
+        this.pageUnProcess.push(i+1);
+      }
+    }
+  },
+  computed: {
+    renderPages(){
+      return this.pageUnProcess.filter((item) => {
+        if((this.currentPage+1) < 3){
+          if(item <= 5) return item
+        }
+        else{
+          if(Math.abs((this.currentPage+1)-item) < 3){
+            return item
+          }
+        } 
+      })
+    }
+  }
 }
 </script>
 
