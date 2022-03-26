@@ -53,6 +53,7 @@ export default {
   },
   watch: {
     pages(val){
+      this.pageUnProcess = [];
       for(let i=0 ;i< val; i++){
         this.pageUnProcess.push(i+1);
       }
