@@ -190,7 +190,7 @@ export default {
       })
       this.currentCity = '苗栗縣';
       this.data = tempData;
-      console.log('data', this.data);
+      // console.log('data', this.data);
       this.getUniqueList(); // 取得資料後，將地區的值取出來
       this.setPopular(); //設定熱門景點按鈕
       this.changeLoading();
