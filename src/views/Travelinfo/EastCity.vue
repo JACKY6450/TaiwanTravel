@@ -3,9 +3,14 @@
     <loading :active.sync="isLoading"></loading>
     <header class="header">
       <div class="container text-center">
-        <h1 class="text-white" style="margin-bottom: 95px">嘉義旅遊資訊</h1>
+        <h1 class="text-white" style="margin-bottom: 95px">東部旅遊資訊</h1>
         <div class="row justify-content-center">
-          <div class="col-sm-6">
+          <div class="col-md-5 mb-4">
+            <select name="" id="" class="form-control input-lg" v-model="currentCity" @change="cityChange()">
+              <option :value="cityName" v-for="(cityName, index) in cityNames" :key="index">{{ cityName }}</option>
+            </select>
+          </div>
+          <div class="col-md-5">
             <select name="" id="" class="form-control input-lg" v-model="currentLocation" @change="changeLoading()">
               <option value="">-- 全部 --</option>
               <option :value="location" v-for="(location, index) in locations" :key="index">{{ location }}</option>
@@ -45,22 +50,26 @@
 
 <script>
 import $ from "jquery"
-import {dataReturn} from '@/static/kaohZipCode.js'
+// import { dataReturn } from '@/static/kaohZipCode.js'
+import { eastCity } from '@/static/PopularCity.js'
 import PopularDistrict from '@/components/PopularDistrict.vue'
 import ShowInfoCol from '@/components/ShowInfoCol.vue'
 import Pagination from '@/components/Pagination.vue'
 import InfoDetail from '@/components/InfoDetail.vue'
 export default {
-  name: 'Kaohsiung',
+  name: 'EastCity',
   components: {
     PopularDistrict, Pagination, ShowInfoCol, InfoDetail
   },
   data() {
     return {
       data: [],
+      currentData: [],
       locations: [],
       popularSet: [],
       dataTemp: {},
+      cityNames: [],
+      currentCity: '',
       currentLocation: '',
       currentPage: 0,
       pages: 0,
@@ -74,9 +83,9 @@ export default {
       let items = []
       // 過濾地點
       if (this.currentLocation !== '') {
-        items = this.data.filter((item) => item.Zone === this.currentLocation)
+        items = this.currentData.filter((item) => item.Zone === this.currentLocation)
       } else {
-        items = this.data
+        items = this.currentData;
       }
       // 分頁製作
       items.forEach((item, i) => {
@@ -95,47 +104,46 @@ export default {
       this.currentPage = 0
     }
   },
-  methods: {
-    handleAdminArea() {
-      const zipAndZone = dataReturn.zipCodeToZone
-      this.data.sort((a, b) => {
-        return parseInt(a.Zipcode - b.Zipcode)
-      })
-      this.data.forEach((item) => {
-        for(let i=0; i < zipAndZone.length ; i++){
-          if(item.Zipcode == zipAndZone[i].Zipcode){
-            item.Zone = zipAndZone[i].Zone;
-            break
-          }
-        }
-      })
-    },  
+  methods: {  
     getUniqueList() {
       const locations = new Set(); // 使用 ES6 中的 set() 取出唯一值
       this.data.forEach((item) => {
-        if(item.Zone !== '' && item.Zone !== undefined){
+        if(item.Region === this.currentCity && item.Zone !== '' && item.Zone !== undefined){
           locations.add(item.Zone)  //使用set.add一樣的元素會被過濾掉
         }
       })
       this.locations = Array.from(locations); //將set轉為一般陣列再存入locations 
-      
+      let currentData = []; //取得這個縣市對應的資料
+      this.data.forEach((item) => {
+        if(item.Region === this.currentCity){
+          currentData.push(item);
+        }
+      })
+      // console.log('currentData', currentData);
+      this.currentData = currentData;
     },
     setPopular() {
       let popularSet = [];
-      this.locations.forEach((item) => {
-        if(['阿里山鄉', '梅山鄉', '東區', '西區'].includes(item)){
-          popularSet.push({
-            Zone: item,
-          });
+      let cityInform = eastCity.cityInform;
+      cityInform.forEach((item) => {
+        if(this.currentCity === item.cityName){
+          popularSet = [...item.popularLocations];
         }
       })
       this.popularColor.forEach((item, index) => {
         popularSet[index] = {
-          ...popularSet[index],
+          Zone: popularSet[index],
           ZoneColor: item,
         }
       })
+      // console.log('popular', popularSet);
       this.popularSet = popularSet;
+    },
+    cityChange() {
+      this.getUniqueList();
+      this.setPopular();
+      this.currentLocation = '';
+      this.changeLoading();
     },
     changePage(page) {
       this.isLoading = true;
@@ -170,14 +178,19 @@ export default {
     init(response){
       // console.log('res', response);
       let data = response.data.XML_Head.Infos.Info;
+      let cityInform = eastCity.cityInform;
+      cityInform.forEach((item) => {
+        this.cityNames.push(item.cityName);
+      })
       let tempData = data.filter((item) => {
-        if(['嘉義市','嘉義縣'].includes(item.Region)) return item
+        if(this.cityNames.includes(item.Region)) return item
       })
       tempData.forEach((item) => {
         item.Zone = item.Town;
       })
+      this.currentCity = '花蓮縣';
       this.data = tempData;
-      // console.log('data', this.data);
+      console.log('data', this.data);
       this.getUniqueList(); // 取得資料後，將地區的值取出來
       this.setPopular(); //設定熱門景點按鈕
       this.changeLoading();
@@ -199,7 +212,7 @@ export default {
 
 <style scoped> 
   .header {
-    background: url("../../assets/pic/bannerChiayi.jpg");
+    background: url("../../assets/pic/bannerHualien.jpg");
     background-size: cover;
     background-position: center center;
   }

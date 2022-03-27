@@ -8,7 +8,7 @@
             <div 
               class="col-sm-6 col-lg-3 text-center mb-3" 
               v-for="item in popularSet" :key="item.ZoneColor">
-              <button 
+              <button v-if="item.Zone"
                 class="btn px-4 w-100" :class="item.ZoneColor" 
                 @click="changeDistrict(item.Zone)">
                 {{item.Zone}}

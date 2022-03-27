@@ -11,31 +11,16 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item active mr-1">
-            <router-link class="nav-link" to="taipei">台北市</router-link>
+            <router-link class="nav-link" to="northCity">北部旅遊</router-link>
           </li>
           <li class="nav-item active mr-1">
-            <router-link class="nav-link" to="newTaipei">新北市</router-link>
+            <router-link class="nav-link" to="midCity">中部旅遊</router-link>
           </li>
           <li class="nav-item active mr-1">
-            <router-link class="nav-link" to="taichung">台中市</router-link>
+            <router-link class="nav-link" to="southCity">南部旅遊</router-link>
           </li>
           <li class="nav-item active mr-1">
-            <router-link class="nav-link" to="keelung">嘉義</router-link>
-          </li>
-          <li class="nav-item active mr-1">
-            <router-link class="nav-link" to="tainan">台南市</router-link>
-          </li>
-          <li class="nav-item active mr-1">
-            <router-link class="nav-link" to="kaohsiung">高雄市</router-link>
-          </li>
-          <li class="nav-item active mr-1">
-            <router-link class="nav-link" to="nantou">南投縣</router-link>
-          </li>
-          <li class="nav-item active mr-1">
-            <router-link class="nav-link" to="hualien">花蓮縣</router-link>
-          </li>
-          <li class="nav-item active mr-1">
-            <router-link class="nav-link" to="taitung">台東縣</router-link>
+            <router-link class="nav-link" to="eastCity">東部旅遊</router-link>
           </li>
         </ul>
         <!-- <form class="form-inline my-2 my-lg-0">
