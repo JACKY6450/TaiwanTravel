@@ -36,6 +36,11 @@ const routes = [
         name: 'EastCity',
         component : () => import('../views/Travelinfo/EastCity.vue')
       },
+      {
+        path: '/outerIsland',
+        name: 'OuterIsland',
+        component : () => import('../views/Travelinfo/OuterIsland.vue')
+      },
     ],
   },
   {

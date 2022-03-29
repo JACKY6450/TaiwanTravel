@@ -90,3 +90,19 @@ export const eastCity = {
     },
   ]
 }
+export const outerIsland = {
+  cityInform: [
+    {
+      cityName: '澎湖縣',
+      popularLocations: ['白沙鄉', '馬公市', '湖西鄉', '花蓮市'],
+    },
+    {
+      cityName: '金門縣',
+      popularLocations: ['金城鎮', '金沙鎮', '金湖鎮', '烈嶼鄉']
+    },
+    {
+      cityName: '連江縣',
+      popularLocations: ['北竿鄉', '莒光鄉', '南竿鄉', '東引鄉']
+    },
+  ]
+}

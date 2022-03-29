@@ -1,7 +1,7 @@
 <template>
   <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner position-relative" style="height: 600px">
-      <div v-for="(item, index) in travelArea" :key="item" class="carousel-item" :class="{ 'active' : index === 0}">
+      <div v-for="(item, index) in travelArea" :key="item.city" class="carousel-item" :class="{ 'active' : index === 0}">
         <img :src="item.pic" class="d-block w-100 h-100" alt="...">
       </div>
       <div class="welcome h1 text-light position-absolute">
@@ -23,7 +23,7 @@
 export default {
   props: {
     travelArea:{
-      type: Object
+      type: Array
     }
   }
 }

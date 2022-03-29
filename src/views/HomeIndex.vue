@@ -5,12 +5,11 @@
       :travelArea="travelArea"
     />
     <div class="container pt-4">
-      <hr class="my-4">
-      <h2 class="mb-4 text-primary" style="font-weight: bold">熱門旅遊景點</h2>
+      <h2 class="my-4 text-primary" style="font-weight: bold">熱門旅遊景點</h2>
       <div class="row">
         <PopularAttract 
           v-for="item in popularAttract" 
-          :key="item"
+          :key="item.Name"
           :item="item"
           @openModal="openModal"
         />
@@ -18,7 +17,7 @@
       <hr class="my-4">
       <h2 class="mb-4 text-primary" style="font-weight: bold">各縣市旅遊資訊</h2>
       <div class="row">
-        <div class="cityCol col-sm-6 col-lg-3 mb-4" v-for="item in travelArea" :key="item.city">
+        <div class="cityCol col-sm-6 col-lg-4 mb-4" v-for="item in travelArea" :key="item.city">
           <router-link :to="item.linkTo">
             <div class="card text-dark text-center">
               <div class="card-head position-relative" style="height:200px">
@@ -51,7 +50,9 @@ import PopularAttract from '@/components/PopularAttract.vue'
 export default {
   name: 'HomeIndex',
   components: {
-    InfoDetail, BannerSlide, PopularAttract
+    InfoDetail, 
+    BannerSlide, 
+    PopularAttract
   },
   data(){
     return {
@@ -77,6 +78,12 @@ export default {
           linkTo: '/eastCity',
           pic: require('@/assets/pic/bannerHualien.jpg'),
         },
+        {
+          city: '離島旅遊資訊',
+          linkTo: '/outerIsland',
+          pic: require('@/assets/pic/bannerLienchiang.jpg'),
+        },
+        
       ],
       popularAttract: [],
       dataTemp: {}
@@ -86,19 +93,18 @@ export default {
     init(response){
       let data = response.data.XML_Head.Infos.Info;
       let highAttract = [];
-      console.log('res', data);
+      // console.log('res', data);
       data.forEach((item) => {
         if(item.Level >= 9 && item.Picture1 !== '' && item.Picture1 !== undefined){
           highAttract.push(item)
         }
       })
-      console.log(highAttract);
+      // console.log(highAttract);
       for(let i=0 ; i<8 ; i++){
         let randIndex =Math.floor(Math.random()*highAttract.length);
         this.popularAttract.push(highAttract[randIndex]);
         highAttract.splice(randIndex, 1);
-      }
-      console.log(this.popularAttract); 
+      } 
     },
     openModal(item){
       this.dataTemp = item;
